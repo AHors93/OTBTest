@@ -1,0 +1,92 @@
+.hotelList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.hotelItem {
+  background-color: #17317F;
+  color: #FFF; 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  max-width: 600px; 
+  margin: 0 auto; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hotelItem:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hotelItem h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #F0F0F0;
+}
+
+.hotelItem p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #D0D0D0;
+}
+
+.hotelItem p + p {
+  border-top: 1px solid #B0B0B0;
+  padding-top: 10px;
+}
+
+.sortOptions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.sortOptions button {
+  background-color: #CCC;
+  color: #17317F;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sortOptions button:hover {
+  background-color: #17317F;
+  color: #FFF;
+}
+
+.sortOptions button.active {
+  background-color: #FEDC07;
+  color: #17317F;
+}
+
+.expandButton {
+  background-color: #FEDC07;
+  color: #17317F;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.expandButton:hover {
+  background-color: #FFCC00;
+  transform: translateY(-2px);
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #D0D0D0;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
