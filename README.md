@@ -35,6 +35,11 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Running Tests
+
+`npm run dev` or if you have jest runner installed can do it manually
+
+
 ## Notes
 
 First point, having read the Next docs, it can serve static files like images (for the background), but for speed I decided to opt against it. If I have time to refactor I would look at implementing this.
@@ -56,5 +61,7 @@ We implement a lot of components like this in my current role, as we have a lot 
 Fourth point, expand the page so that if more than 3 hotels are rendered the page looks the same and the experience is smooth for the user
 
 Fifth point, if i were to iterate further, i'd create a Card like component, for consistency and reusability as well as avoiding DRY
+
+Sixth point, I would like to extend my testing in here, its very basic at the moment but it does verify that things appear on the screen 🚀
 
 Final point, there is a flicker going on when you refresh the page, I think it might to do with the data rendering in the useEffect, would be one to look into in the next iteration
