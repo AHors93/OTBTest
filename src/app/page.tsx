@@ -1,17 +1,47 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { HotelList } from "./components/HotelList";
-import path from "path";
-import fs from 'fs'
+import { HotelList } from "@/components/HotelList";
+import { Hotel } from "./types/types";
 
-async function fetchHotels() {
-  const filePath = path.join(process.cwd(), "public", "data", "hotels.json");
-  const fileContents = fs.readFileSync(filePath, "utf8");
-  return JSON.parse(fileContents);
-}
+const Home = () => {
+  const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-const Home = async () => {
-  const hotels = await fetchHotels();
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const res = await fetch("/data/hotels.json");
+        const data: Hotel[] = await res.json();
+        
+        
+        // I was getting something called a hydration error which i've done come across before, this useEffect formats the departureDate only on the client. 
+        // When the component mounts, it can format the date on initial render which prevents the error i was getting
+        // What i've done is created a new array 'updatedHotels' where you format the date using toLocalDateString
+        const updatedHotels = data.map((hotel) => ({
+          ...hotel,
+          flightDetails: {
+            ...hotel.flightDetails,
+            departureDate: new Date(hotel.flightDetails.departureDate).toLocaleDateString("en-GB"),
+          },
+        }));
+
+        setHotels(updatedHotels); 
+      } catch (error) {
+        console.error("Error fetching hotels:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHotels(); 
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.page}>
@@ -28,6 +58,6 @@ const Home = async () => {
       </main>
     </div>
   );
-}
+};
 
 export default Home;

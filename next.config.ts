@@ -1,8 +1,15 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['static.onthebeach.co.uk'], // Apparently images.domains is deprecated so this would be one to look into changing
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'static.onthebeach.co.uk',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   reactStrictMode: false,
 };

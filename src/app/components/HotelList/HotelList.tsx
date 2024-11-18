@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./HotelList.module.css";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Hotel } from "../../types/types";
 import { SortingButton } from "../SortingButton/SortingButton";
 
@@ -13,25 +13,9 @@ interface HotelListProps {
 export const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
   const [sortBy, setSortBy] = useState<"price" | "rating" | "name">("price");
   const [expanded, setExpanded] = useState<{ [id: string]: boolean }>({});
-  const [formattedHotels, setFormattedHotels] = useState<Hotel[]>([]);
-
-  // I was getting something called a hydration error which i've not come across before, this useEffect formats the departureDate only on the client. 
-  // When the component mounts, it can format the date on initial render which prevents the error i was getting
-  // What i've done is created a new array 'updatedHotels' where you format the date using toLocalDateString
-
-  useEffect(() => {
-    const updatedHotels = hotels.map((hotel) => ({
-      ...hotel,
-      flightDetails: {
-        ...hotel.flightDetails,
-        departureDate: new Date(hotel.flightDetails.departureDate).toLocaleDateString("en-GB"),
-      },
-    }));
-    setFormattedHotels(updatedHotels);
-  }, [hotels]);
 
   const sortedHotels = useMemo(() => {
-    return [...formattedHotels].sort((a, b) => {
+    return [...hotels].sort((a, b) => {
       if (sortBy === "price") {
         return a.bookingDetails.price.amount - b.bookingDetails.price.amount;
       }
@@ -43,17 +27,13 @@ export const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
       }
       return 0;
     });
-  }, [formattedHotels, sortBy]);
+  }, [hotels, sortBy]);
 
   const toggleExpand = (id: string) => {
     setExpanded((prev) => ({
       ...prev,
       [id]: !prev[id],
     }));
-  };
-
-  const renderHotelDate = (date: string) => {
-    return new Date(date).toLocaleDateString("en-GB");
   };
 
   return (
@@ -90,7 +70,7 @@ export const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
           </p>
           <p>
             <strong>Flight:</strong> {hotel.flightDetails.departureAirport} on{" "}
-            {renderHotelDate(hotel.flightDetails.departureDate)}
+            {hotel.flightDetails.departureDate}
           </p>
           <button
             onClick={() => toggleExpand(hotel.resort.id)}
@@ -106,3 +86,4 @@ export const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
     </div>
   );
 };
+
