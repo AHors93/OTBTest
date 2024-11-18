@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./HotelList.module.css";
 import { useMemo, useState } from "react";
 import { Hotel } from "../../types/types";
-import { BookNowBox } from "../BookNowButton/BookNowButton";
+import { BookNowButton } from "../BookNowButton/BookNowButton";
 
 interface HotelListProps {
   hotels: Hotel[];
@@ -79,7 +79,7 @@ export const HotelList: React.FC<HotelListProps> = ({ hotels }) => {
           departing from {hotel.flightDetails.departureAirport} on{" "}
           {hotel.flightDetails.departureDate}
         </p>
-        <BookNowBox price={`${hotel.bookingDetails.price.amount} ${hotel.bookingDetails.price.currency}`} />
+        <BookNowButton price={`${hotel.bookingDetails.price.amount} ${hotel.bookingDetails.price.currency}`} />
         <button
           onClick={() => toggleExpand(hotel.resort.id)}
           className={styles.expandButton}

@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { BookNowBox } from "../src/app/components/BookNowButton/BookNowButton";
+import { BookNowButton } from "../src/app/components/BookNowButton/BookNowButton";
 
 describe("BookNowBox Component", () => {
   test("renders the Book Now button and price correctly", () => {
     const mockPrice = "200 USD";
-    render(<BookNowBox price={mockPrice} />);
+    render(<BookNowButton price={mockPrice} />);
 
     expect(screen.getByText("Book now")).toBeInTheDocument();
 

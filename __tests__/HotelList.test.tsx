@@ -52,22 +52,16 @@ describe("HotelList Component", () => {
   test("expands and collapses hotel description", async () => {
     render(<HotelList hotels={mockHotels} />);
 
-    // Initially, the overview should not be visible
     expect(screen.queryByText("Hotel A Overview")).toBeNull();
 
-    // Use a regular expression to match the "Read more about this hotel" text
     fireEvent.click(screen.getByText(/Read more about this hotel/i));
 
-    // Wait for the description to appear
     await waitFor(() => screen.getByText("Hotel A Overview"));
 
-    // Now, the overview should be visible
     expect(screen.getByText("Hotel A Overview")).toBeInTheDocument();
 
-    // Click to collapse the hotel description
     fireEvent.click(screen.getByText(/Read less about this hotel/i));
 
-    // Wait for the description to disappear
     await waitFor(() => expect(screen.queryByText("Hotel A Overview")).toBeNull());
   });
 });
