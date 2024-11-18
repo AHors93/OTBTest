@@ -1,27 +1,27 @@
 .page {
   position: relative;
-  min-height: 100vh; /* Ensure the container covers at least full viewport height */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .main {
   position: relative;
-  z-index: 1; /* Ensure main content is above the background image */
-  padding: 20px; /* Add some padding to the main content */
+  z-index: 1;
+  padding: 20px;
 }
 
 .background {
-  position: fixed; /* Make the background fixed */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Keep it behind the content */
+  z-index: -1;
 }
 
 .image {
-  object-fit: cover; /* Ensure the image covers the entire area */
+  object-fit: cover;
   width: 100%;
   height: 100%;
 }

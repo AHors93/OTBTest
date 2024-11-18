@@ -1,8 +1,8 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { HotelList } from "../src/app/components/HotelList/HotelList";
 import { Hotel } from "app/types/types";
 
-// Just some sample hotel data
+// Some sample hotel data
 const mockHotels: Hotel[] = [
   {
     resort: {
@@ -11,8 +11,7 @@ const mockHotels: Hotel[] = [
       regionName: "Region A",
       countryName: "Country A",
       starRating: 5,
-      image: { "url": "https://static.onthebeach.co.uk/fe-code-test/hotel-image-1.jpg",
-        "description": "A tranquil resort swimming pool with clear blue water, surrounded by two-story villas with terracotta roofs under a bright blue sky."},
+      image: { url: "https://static.onthebeach.co.uk/fe-code-test/hotel-image-1.jpg", description: "A tranquil resort swimming pool with clear blue water, surrounded by two-story villas with terracotta roofs under a bright blue sky." },
       overview: "Hotel A Overview",
     },
     bookingDetails: {
@@ -34,28 +33,41 @@ describe("HotelList Component", () => {
 
     expect(screen.getByText("Hotel A")).toBeInTheDocument();
 
-    expect(screen.getByText("Sort by Price")).toBeInTheDocument();
+    expect(screen.getByText("Price")).toBeInTheDocument();
+    expect(screen.getByText("Rating")).toBeInTheDocument();
+    expect(screen.getByText("Name")).toBeInTheDocument();
   });
 
   test("sorts hotels by price", () => {
     render(<HotelList hotels={mockHotels} />);
 
-    fireEvent.click(screen.getByText("Sort by Price"));
+    fireEvent.click(screen.getByText("Price"));
 
-    expect(screen.getByText("Sort by Price")).toHaveClass("active");
+    expect(screen.getByText("Price")).toHaveClass("active");
+    // This test only accounts for one hotel, so I'd add more in the future to include multiple
   });
+});
 
-  test("expands and collapses hotel description", () => {
+describe("HotelList Component", () => {
+  test("expands and collapses hotel description", async () => {
     render(<HotelList hotels={mockHotels} />);
 
+    // Initially, the overview should not be visible
     expect(screen.queryByText("Hotel A Overview")).toBeNull();
 
-    fireEvent.click(screen.getByText("Expand Description"));
-    
+    // Use a regular expression to match the "Read more about this hotel" text
+    fireEvent.click(screen.getByText(/Read more about this hotel/i));
+
+    // Wait for the description to appear
+    await waitFor(() => screen.getByText("Hotel A Overview"));
+
+    // Now, the overview should be visible
     expect(screen.getByText("Hotel A Overview")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("Collapse Description"));
+    // Click to collapse the hotel description
+    fireEvent.click(screen.getByText(/Read less about this hotel/i));
 
-    expect(screen.queryByText("Hotel A Overview")).toBeNull();
+    // Wait for the description to disappear
+    await waitFor(() => expect(screen.queryByText("Hotel A Overview")).toBeNull());
   });
 });

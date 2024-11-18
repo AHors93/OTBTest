@@ -1,0 +1,31 @@
+.bookNowBox {
+  background-color: #ffd700;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+  width: auto;
+  max-width: 200px;
+  border: none;
+}
+
+.bookNowButton {
+  background-color: transparent;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border: none;
+}
+
+.bookNowButton:hover {
+  background-color: #17317f;
+  color: white;
+}
+
+.priceText {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #17317f;
+  margin-top: 5px;
+}
