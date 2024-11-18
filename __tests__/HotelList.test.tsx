@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { HotelList } from "../src/app/components/HotelList/HotelList";
-import { Hotel } from "src/app/types/types";
+import { Hotel } from "app/types/types";
 
 // Just some sample hotel data
 const mockHotels: Hotel[] = [
