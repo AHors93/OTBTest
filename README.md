@@ -68,3 +68,5 @@ Seventh point, I've had a bit of a problem formatting the date, normally I would
 Eight point, the designs don't match up entirely with regards to the dropdown, in the next iteration I would move that ontop of the image with the right styling. I've also noticed on the smallest screen the hotel name appears on the image.
 
 Final point, there is a flicker going on when you refresh the page, I think it might to do with the data rendering in the useEffect, would be one to look into in the next iteration
+
+## testing push
